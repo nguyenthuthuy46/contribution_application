@@ -17,8 +17,8 @@ session_start(); ?>
 <meta property="og:image" content="https://cdn.dribbble.com/users/180706/screenshots/5424805/the_sceens_-_mobile_perspective_mockup_3_-_by_tranmautritam.jpg" />
 <meta property="og:site_name" content="atlas " />
 <title>Manage Articles</title>
-<link rel="icon" type="image/x-icon" href="assets/img/logo.png" />
-<link rel="icon" href="assets/img/logo.png" type="image/png" sizes="16x16">
+<link rel="icon" type="image/x-icon" href="../assets/img/logo.png" />
+<link rel="icon" href="../assets/img/logo.png" type="image/png" sizes="16x16">
 <link rel='stylesheet' href='https://d33wubrfki0l68.cloudfront.net/css/478ccdc1892151837f9e7163badb055b8a1833a5/light/assets/vendor/pace/pace.css' />
 <script src='https://d33wubrfki0l68.cloudfront.net/js/3d1965f9e8e63c62b671967aafcad6603deec90c/light/assets/vendor/pace/pace.min.js'></script>
 <!--vendors-->

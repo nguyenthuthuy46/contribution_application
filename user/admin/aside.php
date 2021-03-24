@@ -55,9 +55,9 @@
                 <ul class="sub-menu" style="display: block;">
 
                     <li class="menu-item ">
-                        <a href="/light/" class=" menu-link">
+                        <a href="./listOfUser.php" class=" menu-link">
                             <span class="menu-label">
-                                <a href="./listOfUser.php"> <span class="menu-name">Manage Account</span></a>
+                                <span class="menu-name">Manage Account</span>
                             </span>
                             <span class="menu-icon">
                                 <i class="mdi mdi-account-multiple mdi-24px "></i>
@@ -65,9 +65,9 @@
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="manage-facutlies.php" class=" menu-link">
+                        <a href="./manage_faculties.php" class=" menu-link">
                             <span class="menu-label">
-                                <a href="./manage_facutlies.php"><span class="menu-name">Manage Faculty</span></a>
+                                <span class="menu-name">Manage Faculty</span>
                             </span>
                             <span class="menu-icon">
                                 <i class="mdi mdi-briefcase mdi-24px "></i>
@@ -77,7 +77,7 @@
                     <li class="menu-item">
                         <a href="./manage-topics.php" class=" menu-link">
                             <span class="menu-label">
-                                <a href="./manage_topics.php"><span class="menu-name">Manage Topic</span></a>
+                                <span class="menu-name">Manage Topic</span>
                             </span>
                             <span class="menu-icon">
                                 <i class="mdi mdi-book-open-variant mdi-24px "></i>
@@ -85,7 +85,7 @@
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="/light/dashboard-03" class=" menu-link">
+                        <a href="./manage_users.php" class=" menu-link">
                             <span class="menu-label">
                                 <span class="menu-name">Manage User</span>
                             </span>
@@ -95,9 +95,9 @@
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="./manage-articles.php" class=" menu-link">
+                        <a href="./manage_articles.php" class=" menu-link">
                             <span class="menu-label">
-                                <a href="./viewReportPage.php"> <span class="menu-name">Manager Article</span></a>
+                                <span class="menu-name">Manage Article</span>
                             </span>
                             <span class="menu-icon">
                                 <i class="mdi mdi-file mdi-24px "></i>

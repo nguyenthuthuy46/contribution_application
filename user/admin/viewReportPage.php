@@ -18,8 +18,8 @@ session_start(); ?>
 <meta property="og:image" content="https://cdn.dribbble.com/users/180706/screenshots/5424805/the_sceens_-_mobile_perspective_mockup_3_-_by_tranmautritam.jpg" />
 <meta property="og:site_name" content="atlas " />
 <title>View Report Page</title>
-<link rel="icon" type="image/x-icon" href="assets/img/logo.png" />
-<link rel="icon" href="assets/img/logo.png" type="image/png" sizes="16x16">
+<link rel="icon" type="image/x-icon" href="../assets/img/logo.png" />
+<link rel="icon" href="../assets/img/logo.png" type="image/png" sizes="16x16">
 <link rel='stylesheet' href='https://d33wubrfki0l68.cloudfront.net/css/478ccdc1892151837f9e7163badb055b8a1833a5/light/assets/vendor/pace/pace.css' />
 <script src='https://d33wubrfki0l68.cloudfront.net/js/3d1965f9e8e63c62b671967aafcad6603deec90c/light/assets/vendor/pace/pace.min.js'></script>
 <!--vendors-->
@@ -47,7 +47,7 @@ session_start(); ?>
                 <section class="wrapper ">
                     <div class="row ">
                         <div class="col-lg-9 main-chart ">
-                            <img style="width: 100% " src="img/background.jpg ">
+                            <img style="width: 100% " src="../assets/img/background.jpg ">
                         </div>
 
                         <div class="col-lg-3 ds " style="position: fixed; right: 0; z-index: 1;height: 100%; ">
@@ -59,7 +59,7 @@ session_start(); ?>
                                 </div>
                                 <div class=" col-lg-12 text-left row mt-1">
                                     <div class=" col-md-4 text-center">
-                                        <img src="img/Rectangle 54.png ">
+                                        <img src="../assets/img/Rectangle 54.png ">
                                     </div>
                                     <div class="col-md-8 mt-1">
                                         <h5 style="color: #000; ">Nguyen Minh Phong</h5>

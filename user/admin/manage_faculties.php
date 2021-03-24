@@ -32,8 +32,8 @@ session_start();
 <meta property="og:image" content="https://cdn.dribbble.com/users/180706/screenshots/5424805/the_sceens_-_mobile_perspective_mockup_3_-_by_tranmautritam.jpg" />
 <meta property="og:site_name" content="atlas " />
 <title>Manage Faculty</title>
-<link rel="icon" type="image/x-icon" href="assets/img/logo.png" />
-<link rel="icon" href="assets/img/logo.png" type="image/png" sizes="16x16">
+<link rel="icon" type="image/x-icon" href="../assets/img/logo.png" />
+<link rel="icon" href="../assets/img/logo.png" type="image/png" sizes="16x16">
 <link rel='stylesheet' href='https://d33wubrfki0l68.cloudfront.net/css/478ccdc1892151837f9e7163badb055b8a1833a5/light/assets/vendor/pace/pace.css' />
 <script src='https://d33wubrfki0l68.cloudfront.net/js/3d1965f9e8e63c62b671967aafcad6603deec90c/light/assets/vendor/pace/pace.min.js'></script>
 <!--vendors-->
@@ -107,9 +107,9 @@ session_start();
                                                         <td><?= $row["f_description"] ?></td>
                                                         <td><?= $row["f_manager"] ?></td>
                                                         <td>
-                                                            <a href="" class="btn btn-info" role="button" data-toggle="modal" data-target="#editFaculty"><i class="mdi mdi-pencil-outline"></i> </a>
-                                                            <a href="" class="btn btn-danger" role="button" data-toggle="modal" data-target="#deleteFaculty"><i class="mdi mdi-delete"></i> </a>
-                                                            <a href="" class="btn btn-primary" role="button" data-toggle="modal" data-target="#detailFaculty"><i class="mdi mdi-dots-horizontal"></i> </a>
+                                                            <a href="" class="btn btn-info btn-edit-faculty" role="button" data-id="<?php echo $row["f_id"] ?>" ><i class="mdi mdi-pencil-outline"></i> </a>
+                                                            <a href="" class="btn btn-danger btn-delete-faculty" role="button" data-id="<?php echo $row["f_id"] ?>" ><i class="mdi mdi-delete"></i> </a>
+                                                            <a href="" class="btn btn-primary btn-detail-faculty" role="button" data-id="<?php echo $row["f_id"] ?>" ><i class="mdi mdi-dots-horizontal"></i> </a>
                                                         </td>
                                                     </tr>
                                                 <?php                            }
@@ -177,19 +177,22 @@ session_start();
                                                     <form action="">
                                                         <div class="form-group">
                                                             <label for="inputNameFaculty">Name Faculty</label>
-                                                            <input type="text" class="form-control" id="inputNameFaculty" name="nameFaculty" Value="Advance Computing">
+                                                            <input type="text" class="form-control" id="facultyName">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="inputfacultyId">Faculty ID</label>
-                                                            <input type="text" class="form-control" id="inputFacultyId" name="facultyId" disabled value="Faculty_01">
+                                                            <label for="inputFacultyId">Faculty ID</label>
+                                                            <input type="text" class="form-control" id="facultyNameId">
                                                         </div>
-
                                                         <div class="form-group">
-                                                            <label for="inputManager">Desciption</label>
-                                                            <textarea class="form-control" aria-label="With textarea" spellcheck="false"></textarea>
+                                                            <label for="inputNameFaculty">Manager Faculty</label>
+                                                            <input type="text" class="form-control" id="facultyManager">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="inputManager">Description</label>
+                                                            <textarea class="form-control" aria-label="With textarea" id="description" spellcheck="false"></textarea>
                                                             <grammarly-extension data-grammarly-shadow-root="true" style="position: absolute; top: 0px; left: 0px; pointer-events: none; z-index: 3;" class="cGcvT"></grammarly-extension>
                                                         </div>
-                                                        <input type="button" class="btn btn-primary" name="change" value="Save changes">
+                                                        <input type="button" class="btn btn-primary btn-update-faculty" name="change" value="Save changes">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                                             Close
                                                         </button>
@@ -219,7 +222,7 @@ session_start();
                                                 faculty?
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-danger">Delete</button>
+                                                <button type="button" class="btn btn-danger btn-confirm-delete">Delete</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                                     Close
                                                 </button>
@@ -247,15 +250,15 @@ session_start();
                                                         <tbody>
                                                             <tr>
                                                                 <td>Name Faculty</td>
-                                                                <td>Advance Computing</td>
+                                                                <td id="f-name">Advance Computing</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Faculty ID</td>
-                                                                <td>Faculty_01</td>
+                                                                <td id="f-id">Faculty_01</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Manager Faculty</td>
-                                                                <td>Nguyen Van A</td>
+                                                                <td id="f_manager">Nguyen Van A</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Amount of Topic</td>
@@ -271,11 +274,10 @@ session_start();
                                                             </tr>
                                                             <tr>
                                                                 <td>Desciption</td>
-                                                                <td>
+                                                                <td id="f-description">
                                                                     Desciption here...
                                                                 </td>
                                                             </tr>
-
 
                                                         </tbody>
                                                     </table>
@@ -299,13 +301,86 @@ session_start();
             </div>
         </section>
     </main>
-</body>
+<script src="../../js/utils.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        let activeId = null;
+        $(document).on('click', '.btn-edit-faculty', function (e) {
+            e.preventDefault();
+            const facultyId = parseInt($(this).data("id"));
+            activeId = facultyId;
+            console.log(facultyId);
+            Utils.api("get_faculty_info", {
+                id: facultyId
+            }).then(faculty => {
+                console.log(faculty.data.f_name)
+                $("#facultyName").val(faculty.data.f_name);
+                $("#facultyId").val(faculty.data.f_id);
+                $("#facultyManager").val(faculty.data.f_manager)
+                $("#description").val(faculty.data.f_description);
+                $("#facultyNameId").val(faculty.data.faculty_id)
+                $("#editFaculty").modal();
+            }).catch(err => {
 
+            });
+        });
 
-</body>
+        $(document).on('click', '.btn-update-faculty', function (e) {
+            Utils.api("update_faculty_info", {
+                id: activeId,
+                facultyName: $("#facultyName").val(),
+                description: $("#description").val(),
+                facultyManager: $("#facultyManager").val(),
+                facultyId: $('#facultyNameId').val()
+            }).then(response => {
+                $("#editFaculty").modal("hide");
+                swal("Notice", "Record is updated successfully!", "success").then(function(e) {
+                    location.reload()
+                });
+            }).catch(err => {
+
+            })
+        });
+
+        $(document).on("click", '.btn-delete-faculty', function (e) {
+            e.preventDefault();
+            const facultyId = parseInt($(this).data("id"));
+            $('#deleteFaculty').modal();
+            $(document).on('click', '.btn-confirm-delete', function (e) {
+                Utils.api('delete_faculty_info', {
+                    id: facultyId
+                }).then(response => {
+                    //    Show  smg
+                }).catch(err => {
+                    //     show error
+
+                })
+            })
+        });
+
+        $(document).on('click', '.btn-detail-faculty', function (e) {
+            e.preventDefault();
+            $('#detailFaculty').modal();
+            const facultyId = parseInt($(this).data("id"));
+
+            Utils.api('get_faculty_info', {
+                id: facultyId
+            }).then(response => {
+                $('#f-name').text(response.data.f_name);
+                $('#f-id').text(response.data.f_id);
+                $('#f_manager').text(response.data.f_manager)
+                $('#f-description').text(response.data.f_description)
+            }).catch(err => {
+
+            })
+        })
+    })
+
+</script>
 
 
 <script src='https://d33wubrfki0l68.cloudfront.net/bundles/85bd871e04eb889b6141c1aba0fedfa1a2215991.js'></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!--page specific scripts for demo-->
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
